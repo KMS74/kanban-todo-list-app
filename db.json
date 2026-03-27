@@ -1,0 +1,52 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Design homepage",
+      "description": "Include hero section",
+      "column": "backlog"
+    },
+    {
+      "id": 2,
+      "title": "Setup database",
+      "description": "Install json-server",
+      "column": "backlog"
+    },
+    {
+      "id": 3,
+      "title": "Develop User Authentication",
+      "description": "Implement sign-in and sign-up pages",
+      "column": "in_progress"
+    },
+    {
+      "id": 4,
+      "title": "Create Dashboard Layout",
+      "description": "Include sidebar navigation and top header",
+      "column": "in_progress"
+    },
+    {
+      "id": 5,
+      "title": "API Integration for Kanban Board",
+      "description": "Connect frontend lists with backend endpoints",
+      "column": "review"
+    },
+    {
+      "id": 6,
+      "title": "Drag and Drop Functionality",
+      "description": "Implement DND using a library",
+      "column": "review"
+    },
+    {
+      "id": 7,
+      "title": "Project Initialization",
+      "description": "Initialize Next.js project and required dependencies",
+      "column": "done"
+    },
+    {
+      "id": 8,
+      "title": "Requirements Gathering",
+      "description": "Review and document all user stories",
+      "column": "done"
+    }
+  ]
+}

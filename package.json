@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "server": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
     "@dnd-kit/react": "^0.3.2",
