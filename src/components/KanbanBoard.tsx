@@ -116,7 +116,7 @@ export default function KanbanBoard() {
     return (
       <Box sx={{ p: 4 }}>
         <Alert severity="error" sx={{ borderRadius: 3 }}>
-          Failed to load tasks. Make sure json-server is running on port 4000.
+          Failed to load tasks. Please try again later.
         </Alert>
       </Box>
     );
