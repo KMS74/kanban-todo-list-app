@@ -1,7 +1,7 @@
 "use client";
 
 import { useCreateTask, useUpdateTask } from "@/hooks/useTasks";
-import { COLUMNS, ColumnId, PRIORITY_CONFIG, Priority, Task } from "@/types/task";
+import { ColumnId, Task } from "@/types/task";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
@@ -11,11 +11,12 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  MenuItem,
-  TextField,
-  Typography
+  Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { TaskForm, TaskFormValues, useTaskForm } from "./TaskForm";
+
+const getTimestamp = () => Date.now();
 
 interface TaskDialogProps {
   open: boolean;
@@ -34,56 +35,51 @@ export default function TaskDialog({
   const updateTask = useUpdateTask();
   const isEditing = !!task;
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [column, setColumn] = useState<ColumnId>(defaultColumn);
-  const [priority, setPriority] = useState<Priority>("medium");
-  const [errors, setErrors] = useState<{ title?: string }>({});
+  const form = useTaskForm({ column: defaultColumn });
+  const { reset } = form;
 
   useEffect(() => {
     if (open) {
       if (task) {
-        setTitle(task.title);
-        setDescription(task.description);
-        setColumn(task.column);
-        setPriority(task.priority);
+        reset({
+          title: task.title,
+          description: task.description,
+          column: task.column,
+          priority: task.priority,
+        });
       } else {
-        setTitle("");
-        setDescription("");
-        setColumn(defaultColumn);
-        setPriority("medium");
+        reset({
+          title: "",
+          description: "",
+          column: defaultColumn,
+          priority: "medium",
+        });
       }
-      setErrors({});
     }
-  }, [open, task, defaultColumn]);
+  }, [open, task, defaultColumn, reset]);
 
-  const handleSubmit = () => {
-    if (!title.trim()) {
-      setErrors({ title: "Title is required" });
-      return;
-    }
-
+  const onSubmit = (data: TaskFormValues) => {
     if (isEditing && task) {
       updateTask.mutate(
         {
           ...task,
-          title: title.trim(),
-          description: description.trim(),
-          column,
-          priority,
+          title: data.title.trim(),
+          description: data.description?.trim() || "",
+          column: data.column,
+          priority: data.priority,
         },
-        { onSuccess: onClose }
+        { onSuccess: onClose },
       );
     } else {
       createTask.mutate(
         {
-          title: title.trim(),
-          description: description.trim(),
-          column,
-          priority,
-          order: Date.now(),
+          title: data.title.trim(),
+          description: data.description?.trim() || "",
+          column: data.column,
+          priority: data.priority,
+          order: getTimestamp(),
         },
-        { onSuccess: onClose }
+        { onSuccess: onClose },
       );
     }
   };
@@ -137,83 +133,7 @@ export default function TaskDialog({
       </DialogTitle>
 
       <DialogContent sx={{ pt: 2 }}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5, mt: 1 }}>
-          <TextField
-            label="Title"
-            fullWidth
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-              if (errors.title) setErrors({});
-            }}
-            error={!!errors.title}
-            helperText={errors.title}
-            autoFocus
-          />
-
-          <TextField
-            label="Description"
-            fullWidth
-            multiline
-            rows={3}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-
-          <Box sx={{ display: "flex", gap: 2 }}>
-            <TextField
-              select
-              label="Column"
-              fullWidth
-              value={column}
-              onChange={(e) => setColumn(e.target.value as ColumnId)}
-            >
-              {COLUMNS.map((col) => (
-                <MenuItem key={col.id} value={col.id}>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Box
-                      sx={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: "50%",
-                        backgroundColor: col.color,
-                      }}
-                    />
-                    {col.title}
-                  </Box>
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <TextField
-              select
-              label="Priority"
-              fullWidth
-              value={priority}
-              onChange={(e) => setPriority(e.target.value as Priority)}
-            >
-              {(Object.entries(PRIORITY_CONFIG) as [Priority, typeof PRIORITY_CONFIG.high][]).map(
-                ([key, config]) => (
-                  <MenuItem key={key} value={key}>
-                    <Box
-                      sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                    >
-                      <Box
-                        sx={{
-                          width: 8,
-                          height: 8,
-                          borderRadius: "50%",
-                          backgroundColor: config.color,
-                        }}
-                      />
-                      {config.label}
-                    </Box>
-                  </MenuItem>
-                )
-              )}
-            </TextField>
-          </Box>
-        </Box>
+        <TaskForm id="task-form" form={form} onSubmit={onSubmit} />
       </DialogContent>
 
       <DialogActions sx={{ p: 3, pt: 1 }}>
@@ -228,16 +148,15 @@ export default function TaskDialog({
           Cancel
         </Button>
         <Button
+          type="submit"
+          form="task-form"
           variant="contained"
-          onClick={handleSubmit}
           disabled={createTask.isPending || updateTask.isPending}
           sx={{
-            background:
-              "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+            background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
             boxShadow: "0 4px 12px rgba(99, 102, 241, 0.3)",
             "&:hover": {
-              background:
-                "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+              background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
               boxShadow: "0 6px 20px rgba(99, 102, 241, 0.4)",
             },
             px: 3,
