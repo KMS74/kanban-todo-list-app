@@ -1,15 +1,5 @@
-import { Container, Typography } from "@mui/material";
-
-export const metadata = {
-  title: "Kanban Board",
-};
+import KanbanBoard from "@/components/KanbanBoard";
 
 export default function KanbanPage() {
-  return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Kanban Board
-      </Typography>
-    </Container>
-  );
+  return <KanbanBoard />;
 }

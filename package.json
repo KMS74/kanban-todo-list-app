@@ -10,6 +10,7 @@
     "server": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "@dnd-kit/helpers": "^0.3.2",
     "@dnd-kit/react": "^0.3.2",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",

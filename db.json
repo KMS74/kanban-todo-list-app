@@ -1,52 +1,113 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Design homepage",
-      "description": "Include hero section",
-      "column": "backlog"
+      "title": "Finalize project requirements",
+      "description": "Gather all requirements from stakeholders and document them in confluence.",
+      "column": "done",
+      "priority": "high",
+      "order": 100,
+      "id": "t_001",
+      "createdAt": "2026-03-20T10:00:00.000Z"
     },
     {
-      "id": 2,
-      "title": "Setup database",
-      "description": "Install json-server",
-      "column": "backlog"
+      "title": "Set up GitHub repository",
+      "description": "Initialize the repo, set up branch protection rules, and invite team members.",
+      "column": "done",
+      "priority": "high",
+      "order": 200,
+      "id": "t_002",
+      "createdAt": "2026-03-21T11:30:00.000Z"
     },
     {
-      "id": 3,
-      "title": "Develop User Authentication",
-      "description": "Implement sign-in and sign-up pages",
-      "column": "in_progress"
+      "title": "Design Figma prototype",
+      "description": "Create high-fidelity mockups for all core application screens.",
+      "column": "done",
+      "priority": "medium",
+      "order": 300,
+      "id": "t_003",
+      "createdAt": "2026-03-22T09:15:00.000Z"
     },
     {
-      "id": 4,
-      "title": "Create Dashboard Layout",
-      "description": "Include sidebar navigation and top header",
-      "column": "in_progress"
+      "title": "Implement authentication flow",
+      "description": "Add login, signup, and forgotten password functionality using NextAuth.",
+      "column": "review",
+      "priority": "high",
+      "order": 100,
+      "id": "t_004",
+      "createdAt": "2026-03-24T14:20:00.000Z"
     },
     {
-      "id": 5,
-      "title": "API Integration for Kanban Board",
-      "description": "Connect frontend lists with backend endpoints",
-      "column": "review"
+      "title": "Create database schema",
+      "description": "Design PostgreSQL database schema and write Prisma schema models.",
+      "column": "review",
+      "priority": "high",
+      "order": 200,
+      "id": "t_005",
+      "createdAt": "2026-03-24T16:45:00.000Z"
     },
     {
-      "id": 6,
-      "title": "Drag and Drop Functionality",
-      "description": "Implement DND using a library",
-      "column": "review"
+      "title": "Build Kanban board UI",
+      "description": "Develop the main board view, including columns and mock card components.",
+      "column": "in_progress",
+      "priority": "high",
+      "order": 100,
+      "id": "t_006",
+      "createdAt": "2026-03-25T10:10:00.000Z"
     },
     {
-      "id": 7,
-      "title": "Project Initialization",
-      "description": "Initialize Next.js project and required dependencies",
-      "column": "done"
+      "title": "Implement drag and drop",
+      "description": "Use dnd-kit to allow users to move task cards between different columns.",
+      "column": "in_progress",
+      "priority": "high",
+      "order": 200,
+      "id": "t_007",
+      "createdAt": "2026-03-26T13:00:00.000Z"
     },
     {
-      "id": 8,
-      "title": "Requirements Gathering",
-      "description": "Review and document all user stories",
-      "column": "done"
+      "title": "Write unit tests for UI components",
+      "description": "Ensure core UI components have test coverage using Jest and React Testing Library.",
+      "column": "in_progress",
+      "priority": "medium",
+      "order": 300,
+      "id": "t_008",
+      "createdAt": "2026-03-27T09:20:00.000Z"
+    },
+    {
+      "title": "Integrate API with frontend",
+      "description": "Connect the Kanban board to the backend endpoints for fetching and updating tasks.",
+      "column": "backlog",
+      "priority": "high",
+      "order": 100,
+      "id": "t_009",
+      "createdAt": "2026-03-28T08:00:00.000Z"
+    },
+    {
+      "title": "Add dark mode support",
+      "description": "Implement theme switching and ensure all components look good in dark mode.",
+      "column": "backlog",
+      "priority": "low",
+      "order": 200,
+      "id": "t_010",
+      "createdAt": "2026-03-28T09:30:00.000Z"
+    },
+    {
+      "title": "Optimize performance",
+      "description": "Analyze bundle size and optimize React re-renders on the main board.",
+      "column": "backlog",
+      "priority": "medium",
+      "order": 300,
+      "id": "t_011",
+      "createdAt": "2026-03-28T10:15:00.000Z"
+    },
+    {
+      "title": "Setup CI/CD pipeline",
+      "description": "Create GitHub Actions workflow for automatic linting, testing, and deployment.",
+      "column": "backlog",
+      "priority": "medium",
+      "order": 400,
+      "id": "t_012",
+      "createdAt": "2026-03-28T11:45:00.000Z"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
