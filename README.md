@@ -18,7 +18,7 @@ A full-featured, responsive Kanban board application built with Next.js. This ap
 - **Drag & Drop**: [dnd-kit](https://dndkit.com/)
 - **Forms & Validation**: [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
 - **Notifications**: [React Hot Toast](https://react-hot-toast.com/)
-- **Mock API**: [JSON Server](https://github.com/typicode/json-server)
+- **Live JSON-Server**: [API Docs](https://kanban-app-json-server.vercel.app/)
 
 ## 🚀 Getting Started
 
