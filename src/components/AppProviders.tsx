@@ -9,6 +9,7 @@ import theme from "../theme";
 // TanStack Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,22 @@ export default function AppProviders({
         </ThemeProvider>
       </AppRouterCacheProvider>
       <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          style: {
+            borderRadius: "12px",
+            padding: "16px",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+          },
+          success: {
+            iconTheme: {
+              primary: "#10b981",
+              secondary: "#fff",
+            },
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useCreateTask, useUpdateTask } from "@/hooks/useTasks";
 import { ColumnId, Task } from "@/types/task";
+import toast from "react-hot-toast";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
@@ -68,7 +69,12 @@ export default function TaskDialog({
           column: data.column,
           priority: data.priority,
         },
-        { onSuccess: onClose },
+        { 
+          onSuccess: () => {
+            onClose();
+            toast.success("Task updated successfully!");
+          }
+        },
       );
     } else {
       createTask.mutate(
@@ -79,7 +85,12 @@ export default function TaskDialog({
           priority: data.priority,
           order: getTimestamp(),
         },
-        { onSuccess: onClose },
+        { 
+          onSuccess: () => {
+            onClose();
+            toast.success("Task created successfully!");
+          }
+        },
       );
     }
   };

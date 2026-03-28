@@ -11,6 +11,7 @@ import {
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import toast from "react-hot-toast";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { Task, ColumnId, PRIORITY_CONFIG } from "@/types/task";
 import { useDeleteTask } from "@/hooks/useTasks";
@@ -42,7 +43,11 @@ export default function TaskCard({
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
-    deleteTask.mutate(task.id);
+    deleteTask.mutate(task.id, {
+      onSuccess: () => {
+        toast.success("Task deleted successfully!");
+      }
+    });
   };
 
   return (
