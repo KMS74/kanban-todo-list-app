@@ -41,7 +41,7 @@ export default function KanbanColumn({
   return (
     <Box
       ref={ref}
-      sx={{
+      sx={(theme) => ({
         minWidth: 300,
         maxWidth: 340,
         width: "100%",
@@ -51,11 +51,15 @@ export default function KanbanColumn({
         borderRadius: 4,
         background: isDropTarget
           ? alpha(column.color, 0.04)
+          : theme.palette.mode === "dark"
+          ? "rgba(30,41,59,0.6)"
           : "rgba(255,255,255,0.6)",
         backdropFilter: "blur(20px)",
         border: "1px solid",
         borderColor: isDropTarget
           ? alpha(column.color, 0.3)
+          : theme.palette.mode === "dark"
+          ? "rgba(255,255,255,0.06)"
           : "rgba(0,0,0,0.06)",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         boxShadow: isDropTarget
@@ -64,7 +68,7 @@ export default function KanbanColumn({
         transform: isDropTarget ? "scale(1.01)" : "scale(1)",
         maxHeight: "calc(100vh - 100px)",
         overflow: "hidden",
-      }}
+      })}
     >
       {/* Column Header */}
       <Box
@@ -116,7 +120,7 @@ export default function KanbanColumn({
 
       {/* Cards Container */}
       <Box
-        sx={{
+        sx={(theme) => ({
           flex: 1,
           overflowY: "auto",
           px: 1.5,
@@ -131,10 +135,13 @@ export default function KanbanColumn({
             background: "transparent",
           },
           "&::-webkit-scrollbar-thumb": {
-            background: "rgba(0,0,0,0.08)",
+            background:
+              theme.palette.mode === "dark"
+                ? "rgba(255,255,255,0.08)"
+                : "rgba(0,0,0,0.08)",
             borderRadius: 2,
           },
-        }}
+        })}
       >
         {visibleIds.map((id, index) => {
           const task = tasksById[id];
@@ -181,21 +188,24 @@ export default function KanbanColumn({
           disableRipple
           disableTouchRipple
           disableFocusRipple
-          sx={{
+          sx={(theme) => ({
             color: "text.secondary",
             fontSize: "0.8rem",
             fontWeight: 600,
             py: 1,
             borderRadius: 2.5,
             border: "1px dashed",
-            borderColor: "rgba(0,0,0,0.1)",
+            borderColor:
+              theme.palette.mode === "dark"
+                ? "rgba(255,255,255,0.1)"
+                : "rgba(0,0,0,0.1)",
             "&:hover": {
               borderColor: alpha(column.color, 0.4),
               backgroundColor: alpha(column.color, 0.04),
               color: column.color,
             },
             transition: "all 0.2s ease",
-          }}
+          })}
         >
           Add task
         </Button>

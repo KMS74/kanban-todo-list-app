@@ -54,15 +54,23 @@ export default function TaskCard({
     <Box
       ref={ref}
       onClick={onEdit}
-      sx={{
+      sx={(theme) => ({
         p: 2,
         borderRadius: 3,
-        backgroundColor: "#ffffff",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "rgba(30,41,59,0.9)" : "#ffffff",
         border: "1px solid",
-        borderColor: isDragging ? alpha(columnColor, 0.3) : "rgba(0,0,0,0.05)",
+        borderColor: isDragging
+          ? alpha(columnColor, 0.3)
+          : theme.palette.mode === "dark"
+          ? "rgba(255,255,255,0.05)"
+          : "rgba(0,0,0,0.05)",
         cursor: isDragging ? "grabbing" : "grab",
         opacity: isDragging ? 0.4 : 1,
-        boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+        boxShadow:
+          theme.palette.mode === "dark"
+            ? "0 1px 3px rgba(0,0,0,0.3)"
+            : "0 1px 3px rgba(0,0,0,0.04)",
         transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
         "&:hover": {
           borderColor: alpha(columnColor, 0.2),
@@ -77,7 +85,7 @@ export default function TaskCard({
         },
         position: "relative",
         userSelect: "none",
-      }}
+      })}
     >
       {/* Drag Handle */}
       <Box

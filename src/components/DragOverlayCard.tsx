@@ -14,14 +14,18 @@ export default function DragOverlayCard({ task }: DragOverlayCardProps) {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         p: 2,
         borderRadius: 3,
-        backgroundColor: "#ffffff",
+        backgroundColor:
+          theme.palette.mode === "dark" ? "rgba(30,41,59,0.95)" : "#ffffff",
         border: "1px solid",
         borderColor: alpha(columnColor, 0.3),
         cursor: "grabbing",
-        boxShadow: `0 16px 48px ${alpha(columnColor, 0.25)}, 0 4px 12px rgba(0,0,0,0.1)`,
+        boxShadow:
+          theme.palette.mode === "dark"
+            ? `0 16px 48px ${alpha(columnColor, 0.25)}, 0 4px 12px rgba(0,0,0,0.6)`
+            : `0 16px 48px ${alpha(columnColor, 0.25)}, 0 4px 12px rgba(0,0,0,0.1)`,
         width: 300,
         userSelect: "none",
         position: "relative",
@@ -35,7 +39,7 @@ export default function DragOverlayCard({ task }: DragOverlayCardProps) {
           height: 3,
           background: column?.gradient ?? columnColor,
         },
-      }}
+      })}
     >
       <Chip
         label={priorityConfig.label}

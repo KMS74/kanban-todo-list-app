@@ -4,7 +4,7 @@
 import { CssBaseline } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
+import { useAppTheme } from "../theme";
 
 // TanStack Query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,10 +18,12 @@ export default function AppProviders({
 }: {
   children: React.ReactNode;
 }) {
+  const theme = useAppTheme();
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppRouterCacheProvider>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme} disableTransitionOnChange noSsr>
           <CssBaseline />
           {children}
         </ThemeProvider>
@@ -34,6 +36,8 @@ export default function AppProviders({
             borderRadius: "12px",
             padding: "16px",
             boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.background.paper,
           },
           success: {
             iconTheme: {
