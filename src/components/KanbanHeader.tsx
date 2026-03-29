@@ -40,13 +40,16 @@ function HeaderTitle({ totalTasks }: { totalTasks: number }) {
       <Box>
         <Typography
           variant="h6"
-          sx={{
+          sx={(theme) => ({
             fontWeight: 800,
-            background: "linear-gradient(135deg, #1e293b 0%, #475569 100%)",
+            background:
+              theme.palette.mode === "dark"
+                ? "linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%)"
+                : "linear-gradient(135deg, #1e293b 0%, #475569 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             lineHeight: 1.2,
-          }}
+          })}
         >
           Kanban Board
         </Typography>
@@ -74,22 +77,28 @@ function SearchInput({
       size="small"
       value={searchQuery}
       onChange={(e) => setSearchQuery(e.target.value)}
-      sx={{
+      sx={(theme) => ({
         width: { xs: "100%", sm: 600 },
         order: { xs: 3, sm: 0 },
         "& .MuiOutlinedInput-root": {
-          background: "rgba(255,255,255,0.9)",
+          background:
+            theme.palette.mode === "dark"
+              ? "rgba(15,23,42,0.9)"
+              : "rgba(255,255,255,0.9)",
           backdropFilter: "blur(10px)",
           borderRadius: 3,
           transition: "all 0.2s ease",
           "&:hover": {
-            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+            boxShadow:
+              theme.palette.mode === "dark"
+                ? "0 2px 8px rgba(0,0,0,0.3)"
+                : "0 2px 8px rgba(0,0,0,0.06)",
           },
           "&.Mui-focused": {
             boxShadow: "0 4px 16px rgba(99, 102, 241, 0.15)",
           },
         },
-      }}
+      })}
       slotProps={{
         input: {
           startAdornment: (
@@ -181,17 +190,20 @@ export default function KanbanHeader({
 }: KanbanHeaderProps) {
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         px: { xs: 2, md: 4 },
         py: 2.5,
-        background: "rgba(255,255,255,0.8)",
+        background:
+          theme.palette.mode === "dark"
+            ? "rgba(15,23,42,0.8)"
+            : "rgba(255,255,255,0.8)",
         backdropFilter: "blur(20px)",
         borderBottom: "1px solid",
         borderColor: "divider",
         position: "sticky",
         top: 0,
         zIndex: 100,
-      }}
+      })}
     >
       <Box
         sx={{

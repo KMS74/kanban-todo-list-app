@@ -115,11 +115,13 @@ export default function KanbanBoard() {
 
   return (
     <Box
-      sx={{
+      sx={(theme) => ({
         minHeight: "100vh",
         background:
-          "linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff7ed 100%)",
-      }}
+          theme.palette.mode === "dark"
+            ? "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #020617 100%)"
+            : "linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #fff7ed 100%)",
+      })}
     >
       <KanbanHeader
         totalTasks={totalTasks}
@@ -254,7 +256,7 @@ export default function KanbanBoard() {
           }}
         >
           <Box
-            sx={{
+            sx={(theme) => ({
               display: "flex",
               gap: 2.5,
               p: { xs: 2, md: 3 },
@@ -268,10 +270,13 @@ export default function KanbanBoard() {
                 background: "transparent",
               },
               "&::-webkit-scrollbar-thumb": {
-                background: "rgba(0,0,0,0.1)",
+                background:
+                  theme.palette.mode === "dark"
+                    ? "rgba(255,255,255,0.1)"
+                    : "rgba(0,0,0,0.1)",
                 borderRadius: 4,
               },
-            }}
+            })}
           >
             {COLUMNS.map((col) => (
               <KanbanColumn
